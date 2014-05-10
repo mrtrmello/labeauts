@@ -1,0 +1,22 @@
+<%= form_for :user,  url: users_path do |f| %>
+    <div class="title">New User</div>
+    <p>
+      <%= label_tag(:username, "E-mail:") %><br/>
+      <%= f.text_field :username %>
+    </p>
+
+    <p>
+      <%= label_tag(:password, "Password:") %><br/>
+      <%= f.password_field :password %>
+      <%= f.hidden_field :role, :value => "buyer" %>
+    </p>
+
+    <p>
+      <%= label_tag(:cpassword, "Confirm Password:") %><br/>
+      <%= f.password_field :cpassword %>
+    </p>
+
+    <p>
+      <%= submit_tag("Sign Up") %>
+    </p>
+<% end %>

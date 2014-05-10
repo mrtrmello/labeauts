@@ -1,0 +1,5 @@
+<div class="title">Cart:
+<%=Cart.where("user = ?", session[:current_user_id]).count %>
+</div>
+<% Cart.where("user = ?", session[:current_user_id]).each do |product| %>
+<% end%>

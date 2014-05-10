@@ -1,0 +1,49 @@
+<br/>
+<% if params['q'].nil? %>
+<% Product.all.each do |product| %>
+      <li  style="margin-left:8px; vertical-align: top; normal; padding-right: 50px ;padding-bottom: 22px;float: none; list-style: none;margin-top: 10px; display: inline-block; width: 250px ">
+      <img class="logo" src="<%= asset_path product.pic %>" alt="logo"  height="200px" width="250px"/><br/>
+      <strong>Category:</strong>
+      <%= product.category %>
+    ` <br/>
+      <strong>Price:</strong>
+      <%= product.price %>
+      <br/>
+      <%= link_to 'Show', product_path(product) %>
+      <% if !session[:current_user_id].nil? %>
+          <% if session[:role] == 'admin' %>
+              <%= link_to 'Edit', edit_product_path(product)+"?edit=product" %>
+              <%= link_to 'Delete', product_path(product), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+      <% end %>
+      <br/>
+      </li>
+<% end %>
+<br/>
+<% else %>
+    <% Product.where("category = ?", params['q']).each do |product| %>
+        <li  style="margin-left:8px; normal; padding-right: 30px ;padding-bottom: 22px;float: none; list-style: none;margin-top: 10px; display: inline-block; width: 190px ">
+          <img class="logo" src="<%= asset_path product.pic %>" alt="logo"  height="150px" width="200px"/><br/>
+          <strong>Category:</strong>
+          <%= product.category %>
+          ` <br/>
+          <strong>Category:</strong>
+          <%= product.name %>
+          <br/>
+          <strong>Price:</strong>
+          <%= product.price %>
+          <br/>
+          <%= link_to 'Show', product_path(product) %>
+          <% if !session[:current_user_id].nil? %>
+              <% if session[:role] == 'admin' %>
+                  <%= link_to 'Edit', edit_product_path(product)+"?edit=product" %>
+                  <%= link_to 'Delete', product_path(product), method: :delete, data: { confirm: 'Are you sure?' } %>
+              <% else %>
+                  <%= link_to 'Add to cart', '?item='+product.id.to_s %>
+              <% end %>
+          <% end %>
+          <br/>
+        </li>
+    <% end %>
+    <br/>
+<% end %>

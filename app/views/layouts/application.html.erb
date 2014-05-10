@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Labeaut</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<br/>
+<table width="970px" align="center">
+  <tr>
+    <td>
+        <table width="100%">
+          <tr>
+            <td>
+                <img class="logo" src="<%= asset_path 'logo.jpg' %>" alt="logo"  height="80px" width="180px"/>
+            </td>
+            <td align="right" valign="bottom">
+              <div class="menu">
+              <% if session[:current_user_id].nil? %>
+                <%= link_to 'Resiter', root_path+'users/new' %> <%= link_to 'Login', controller: 'users' %></div>
+              <% else %>
+                  <% if session[:role] == 'admin' %>
+                  <%= link_to 'Add product',  root_path+'products/new' %>
+                  <% end %>
+                  <%= link_to session[:username].to_s,  root_path+'users/show/' %>
+                  <%= link_to 'Logout',  root_path+'users/?logout='+session[:current_user_id].to_s %>
+              <% end %>
+              </div>
+            </td>
+           </tr>
+          </table>
+        <div class="catalogue"><%= link_to 'Home:', root_path %> <%= link_to 'Skin Care', root_path+"?q=Skin Care" %> <%= link_to 'Personal Cleanliness', root_path+"?q=Personal Cleanliness" %>  <%= link_to 'Nail Preparations', root_path+"?q=Nail Preparations" %></div>
+        <div class="content"><%= yield %></div>
+        <div class="foot"><br/></div>
+    </td>
+   </tr>
+</table>
+</body>
+</html>

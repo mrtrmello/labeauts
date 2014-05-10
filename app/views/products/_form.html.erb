@@ -1,0 +1,23 @@
+<%= form_for @product,name:'product',multipart:true do |f| %>
+    <p>
+      <%= label_tag(:category, "Category:") %><br/>
+      <%= select_tag(:category, "<option>Skin Care</option><option>Personal Cleanliness</option><option>Nail Preparations</option>".html_safe , name:'category') %>
+    </p>
+
+    <p>
+      <%= label_tag(:name, "Name:") %><br/>
+      <%= f.text_field :name , name: 'name' %>
+    </p>
+    <%   %>
+    <%= label_tag(:pic, "Pic") %><br/>
+    <%= f.file_field :pic, name:'pic' %>
+    <% %>
+    <p>
+      <%= label_tag(:price, "Price") %><br/>
+      <%= f.text_field :price, name:'price' %>
+    </p>
+
+    <p>
+      <%= submit_tag("Add") %>
+    </p>
+<% end %>
